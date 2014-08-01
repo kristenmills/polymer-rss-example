@@ -1,0 +1,24 @@
+{
+  "name": "angular-rss",
+  "version": "0.0.0",
+  "authors": [
+    "kristenmills <kristen@kristen-mills.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/kristenmills/angular-rss",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "material-design": "angular/material"
+  }
+}
