@@ -19,6 +19,6 @@
     "tests"
   ],
   "dependencies": {
-    "material-design": "angular/material"
+    "angular": "~1.2.21"
   }
 }

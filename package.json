@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/kristenmills/angular-rss",
   "devDependencies": {
-    "gulp": "~3.8.6"
+    "gulp": "~3.8.6",
+    "gulp-concat": "~2.3.4",
+    "gulp-jade": "~0.7.0",
+    "gulp-uglify": "~0.3.1",
+    "del": "~0.1.1"
   }
 }
