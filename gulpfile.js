@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var jade = require('gulp-jade');
 var del = require('del');
+var buildBranch = require('buildbranch');
 
 var paths = {
   scripts: 'src/**/*.js',

@@ -21,6 +21,7 @@
     "gulp-concat": "~2.3.4",
     "gulp-jade": "~0.7.0",
     "gulp-uglify": "~0.3.1",
-    "del": "~0.1.1"
+    "del": "~0.1.1",
+    "buildbranch": "0.0.1"
   }
 }
