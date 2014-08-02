@@ -16,20 +16,20 @@ gulp.task('clean', function(cb) {
   del(['build'], cb);
 });
 
-gulp.task('scripts', ['clean'], function() {
+gulp.task('scripts', function() {
   gulp.src(paths.scripts)
     .pipe(uglify())
     .pipe(concat('app.min.js'))
     .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('templates', ['clean'], function() {
+gulp.task('templates', function() {
   gulp.src(paths.jade)
     .pipe(jade())
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('components', ['clean'], function(){
+gulp.task('components', function(){
   gulp.src(paths.components)
     .pipe(gulp.dest('build/bower_components'));
 })
