@@ -1,7 +1,34 @@
-angular.module("rss", [])
-  .controller("RSSController", ["$scope", "$http", function($scope, $http){
+angular.module("rss", ['ngMaterial'])
+  .controller("RSSController", ["$scope", "$http", "$materialSidenav", "$timeout", function($scope, $http, $materialSidenav, $timeout){
 
     $scope.feeds = [];
+    $scope.selectedTabIndex = 0
+
+    var addSidebar;
+    $timeout(function() {
+      addSidebar = $materialSidenav('add');
+    });
+
+    var viewSidebar;
+    $timeout(function() {
+      viewSidebar = $materialSidenav('view');
+    });
+
+    $scope.tabs = [
+      { name: 'Add Feed', sideBar: addSidebar },
+      { name: 'View Feed List', sideBar: viewSidebar }
+    ]
+
+    // $scope.$watch('selectedTabIndex', function(index, oldIndex) {
+    //   console.log('selecting from', oldIndex, 'to', index);
+    //   $scope.reverse = index < oldIndex;
+    //   $scope.tabs[oldIndex].sidebar.close();
+    //   $scope.tabs[index].sidebar.toggle();
+    // });
+
+    $scope.toggleViewSidebar = function(){
+      viewSidebar.toggle();
+    }
 
     $scope.addFeed = function(url) {
       url = url.trim();

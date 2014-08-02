@@ -1,5 +1,5 @@
 doctype html
-html(lang="en" ng-app='rss')
+html(lang='en' ng-app='rss')
   head
     title Angular RSS
     script(src='bower_components/jquery/dist/jquery.min.js')
@@ -14,4 +14,13 @@ html(lang="en" ng-app='rss')
     link(rel='stylesheet' href='material/dist/material-design.min.css')
   body
     div(ng-controller='RSSController')
-
+      material-toolbar.material-theme-dark
+        .material-toolbar-tools
+          span.material-flex RSS Feed Reader
+      material-tabs(selected='selectedTabIndex' nobar)
+        material-tab(ng-repeat='tab in tabs' label='{{tab.name}}' ng-click='toggleViewSidebar()')
+      material-sidenav.material-sidenav-left.material-whiteframe-z2(component-id='add')
+        div
+          h2 Add Feed
+      material-sidenav.material-sidenav-right.material-whiteframe-z2(component-id='view')
+        h2 View Feed List
