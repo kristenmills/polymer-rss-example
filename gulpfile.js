@@ -9,7 +9,8 @@ var buildBranch = require('buildbranch');
 var paths = {
   scripts: 'src/**/*.js',
   jade: 'src/**/*.jade',
-  components: 'bower_components/**/*'
+  components: 'bower_components/**/*',
+  material: 'material/**/*'
 };
 
 gulp.task('clean', function(cb) {
@@ -19,7 +20,6 @@ gulp.task('clean', function(cb) {
 gulp.task('scripts', function() {
   gulp.src(paths.scripts)
     .pipe(uglify())
-    .pipe(concat('app.min.js'))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -32,7 +32,12 @@ gulp.task('templates', function() {
 gulp.task('components', function(){
   gulp.src(paths.components)
     .pipe(gulp.dest('build/bower_components'));
-})
+});
+
+gulp.task('material', function(){
+  gulp.src(paths.material)
+    .pipe(gulp.dest('build/material'));
+});
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
@@ -52,6 +57,6 @@ gulp.task('ghPages', function(){
   });
 });
 
-gulp.task('build', ['scripts', 'templates', 'components']);
+gulp.task('build', ['scripts', 'templates', 'components', 'material']);
 gulp.task('default', ['build', 'watch']);
 gulp.task('deploy', ['build', 'ghPages']);
