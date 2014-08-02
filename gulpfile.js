@@ -40,7 +40,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.jade, ['templates']);
 });
 
-gulp.task('deploy', function(){
+gulp.task('ghPages', function(){
   buildBranch({
     branch: 'gh-pages',
     folder: 'build',
@@ -52,5 +52,6 @@ gulp.task('deploy', function(){
   });
 });
 
-// The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'scripts', 'templates', 'components']);
+gulp.task('build', ['scripts', 'templates', 'components']);
+gulp.task('default', ['build', 'watch']);
+gulp.task('deploy', ['build', 'ghPages']);
