@@ -1,0 +1,17 @@
+doctype html
+html(lang="en" ng-app='rss')
+  head
+    title Angular RSS
+    script(src='bower_components/jquery/dist/jquery.min.js')
+    script(src='bower_components/angular/angular.min.js')
+    script(src='bower_components/angular-animate/angular-animate.min.js')
+    script(src='material/config/lib/angular-animate-sequence/angular-animate-sequence.js')
+    script(src='material/config/lib/angular-animate-sequence/angular-animate-stylers.js')
+    script(src='material/dist/material-design.min.js')
+    script(src='bower_components/lodash/dist/lodash.min.js')
+    script(src='js/angular-rss.js')
+
+    link(rel='stylesheet' href='material/dist/material-design.min.css')
+  body
+    div(ng-controller='RSSController')
+
