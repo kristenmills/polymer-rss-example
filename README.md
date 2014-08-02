@@ -1,4 +1,4 @@
-angular-rss
+polymer-rss
 ===========
 
-Playing around with angular making a simple rss feed. 
+Playing around with polymer making a simple rss feed.
