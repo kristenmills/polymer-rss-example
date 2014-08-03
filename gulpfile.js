@@ -4,7 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var jade = require('gulp-jade');
 var del = require('del');
-var deploy = require('gulp-gh-pages');
+var shell = require('gulp-shell');
 var webserver= require('gulp-webserver');
 
 var paths = {
@@ -55,10 +55,14 @@ gulp.task('webserver', function() {
     }));
 });
 
-gulp.task('ghPages', function(){
-  gulp.src(paths.build)
-    .pipe(deploy({}));
-});
+gulp.task('ghPages', shell.task([
+  'git unstage',
+  'git add build',
+  'git commit -m "Build ' + new Date().toISOString() + '"',
+  'git push origin `git subtree split --prefix build gh-pages`:gh-pages --force',
+  'git subtree push --prefix build origin gh-pages',
+  'git uncommit && git unstage'
+]));
 
 gulp.task('build', ['scripts', 'templates', 'components', 'css']);
 gulp.task('default', ['build', 'webserver', 'watch']);
