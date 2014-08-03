@@ -1,0 +1,15 @@
+link(rel='import' href='../bower_components/core-list/core-list.html')
+
+polymer-element(name='feed-sidebar' attributes='feed')
+  template
+    core-list(data="{{data.feed.entries}}")
+      template
+        div
+          span {{title}}
+          hr
+  script.
+    Polymer('feed-sidebar', {
+      ready: function(){
+        this.data = {}
+      }
+    });

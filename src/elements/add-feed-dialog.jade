@@ -6,9 +6,9 @@ link(rel='import' href='../bower_components/paper-button/paper-button.html')
 link(rel='import' href='../bower_components/paper-toast/paper-toast.html')
 link(rel='import' href='../bower_components/polymer-jsonp/polymer-jsonp.html')
 
-polymer-element(name='add-feed-dialog' attributes='storage')
+polymer-element(name='add-feed-dialog')
   template
-    polymer-jsonp#ajaxfeed(url='https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q={{feedUrl}}&callback=')
+    polymer-jsonp#ajaxfeed(url='https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=15&q={{feedUrl}}&callback=')
     paper-dialog#add(heading='Add New Field' transition='paper-dialog-transition-center')
       paper-input(floatingLabel label='Feed URL' value='{{feedUrl}}')
       br

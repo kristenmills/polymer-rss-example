@@ -1,7 +1,7 @@
 doctype html
 html(lang='en' ng-app='rss')
   head
-    title Angular RSS
+    title Polymer RSS
     script(src='bower_components/platform/platform.js')
     script(src='bower_components/lodash/dist/lodash.min.js')
 
@@ -13,6 +13,7 @@ html(lang='en' ng-app='rss')
     link(rel="import" href="elements/add-feed-dialog.html")
     link(rel="import" href="elements/feed-list.html")
     link(rel="import" href="elements/feed-tabs.html")
+    link(rel="import" href="elements/feed-sidebar.html")
     link(href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css')
     link(href='css/app.css' rel='stylesheet')
     style(shim-shadowdom).
@@ -35,8 +36,9 @@ html(lang='en' ng-app='rss')
       add-feed-dialog
 
       core-drawer-panel
-        div(drawer)
-        div(main)
+        core-header-panel(drawer)
+          feed-sidebar
+        core-header-panel(main)
     script.
       document.addEventListener('polymer-ready', function(e) {
         var btn = document.querySelector('paper-icon-button');
