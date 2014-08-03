@@ -24,7 +24,7 @@ polymer-element(name='add-feed-dialog' attributes='storage')
           function(event) {
             var response = event.detail.response;
             if(response.responseStatus === 200 ){
-              var feed_object = { url: other.feedUrl, feed: response }
+              var feed_object = { url: other.feedUrl, feed: response.responseData.feed }
               other.feedlist.add(feed_object);
               other.toastMessage = "Successfully added feed";
               document.querySelector('add-feed-dialog').$.toast.show();

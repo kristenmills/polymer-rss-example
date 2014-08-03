@@ -10,9 +10,10 @@ html(lang='en' ng-app='rss')
     link(rel="import" href="bower_components/core-icons/core-icons.html")
     link(rel="import" href="bower_components/paper-icon-button/paper-icon-button.html")
     link(rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html")
-    link(rel="import" href="bower_components/core-localstorage/core-localstorage.html")
+    link(rel='import' href='../bower_components/paper-tabs/paper-tabs.html')
     link(rel="import" href="elements/add-feed-dialog.html")
     link(rel="import" href="elements/feed-list.html")
+    link(rel="import" href="elements/feed-tabs.html")
     link(href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css')
     link(href='css/app.css' rel='stylesheet')
     style(shim-shadowdom).
@@ -22,15 +23,19 @@ html(lang='en' ng-app='rss')
       paper-icon-button.white::shadow core-icon {
         fill: #fff;
       }
+
   body(unresolved fullbleed)
     feed-list
-    core-header-panel
+    core-header-panel(mode='seamed')
       core-toolbar
-        span(flex style='color:white;') Feed Reader
+        div(flex style='color:white;') Feed Reader
         paper-icon-button.white(icon='add')
-    div
-      add-feed-dialog(storage="storage")
 
+        div.bottom.fit(horizontal layout)
+      feed-tabs
+
+    div
+        add-feed-dialog
     script.
       document.addEventListener('polymer-ready', function(e) {
         var btn = document.querySelector('paper-icon-button');

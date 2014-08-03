@@ -1,0 +1,22 @@
+link(rel='import' href='../bower_components/paper-tabs/paper-tabs.html')
+
+
+polymer-element(name='feed-tabs')
+  template
+    style.
+      paper-tabs {
+        background-color: #00bcd4;
+        color: #fff;
+      }
+
+    paper-tabs(selected="0" flex nobar )
+      template(repeat='{{feed in feeds}}')
+        paper-tab {{feed.feed.title}}
+
+  script.
+    Polymer('feed-tabs', {
+      ready: function() {
+        this.selectedTab = 0
+        this.feeds = document.querySelector('feed-list').feeds;
+      }
+    });
