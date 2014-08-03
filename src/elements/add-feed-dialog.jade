@@ -1,0 +1,45 @@
+link(rel='import' href='../bower_components/paper-dialog/paper-dialog.html')
+link(rel='import' href='../bower_components/paper-dialog/paper-dialog-transition.html')
+link(rel='import' href='../bower_components/core-ajax/core-ajax.html')
+link(rel='import' href='../bower_components/paper-input/paper-input.html')
+link(rel='import' href='../bower_components/paper-button/paper-button.html')
+link(rel='import' href='../bower_components/paper-toast/paper-toast.html')
+link(rel='import' href='../bower_components/polymer-jsonp/polymer-jsonp.html')
+
+polymer-element(name='add-feed-dialog' attributes='storage')
+  template
+    polymer-jsonp#ajaxfeed(url='https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q={{feedUrl}}&callback=')
+    paper-dialog#add(heading='Add New Field' transition='paper-dialog-transition-center')
+      paper-input(floatingLabel label='Feed URL' value='{{feedUrl}}')
+      paper-button(label='Submit' on-tap="{{addFeed}}")
+      paper-toast#toast(text='{{toastMessage}}')
+  script.
+    Polymer('add-feed-dialog', {
+      ready: function(){
+        this.feedUrl = '';
+        var other = this;
+        this.ajax = document.querySelector('add-feed-dialog').$.ajaxfeed;
+        this.feedlist = document.querySelector('feed-list');
+        this.ajax.addEventListener("polymer-response",
+          function(event) {
+            var response = event.detail.response;
+            if(response.responseStatus === 200 ){
+              var feed_object = { url: other.feedUrl, feed: response }
+              other.feedlist.add(feed_object);
+              other.toastMessage = "Successfully added feed";
+              document.querySelector('add-feed-dialog').$.toast.show();
+            }else {
+              other.toastMessage = response.responseDetails;
+              document.querySelector('add-feed-dialog').$.toast.show();
+            }
+          });
+      },
+      addFeed: function() {
+        if(this.feedlist.contains(this.feedUrl)){
+          this.toastMessage = 'Already added feed';
+          document.querySelector('add-feed-dialog').$.toast.show();
+        } else {
+          this.ajax.go();
+        }
+      }
+    });

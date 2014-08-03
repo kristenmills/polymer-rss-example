@@ -11,7 +11,8 @@ html(lang='en' ng-app='rss')
     link(rel="import" href="bower_components/paper-icon-button/paper-icon-button.html")
     link(rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html")
     link(rel="import" href="bower_components/core-localstorage/core-localstorage.html")
-
+    link(rel="import" href="elements/add-feed-dialog.html")
+    link(rel="import" href="elements/feed-list.html")
     link(href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css')
     link(href='css/app.css' rel='stylesheet')
     style(shim-shadowdom).
@@ -22,16 +23,20 @@ html(lang='en' ng-app='rss')
         fill: #fff;
       }
   body(unresolved fullbleed)
-    core-localstorage(name="feeds" id='storage')
+    feed-list
     core-header-panel
       core-toolbar
         span(flex style='color:white;') Feed Reader
-        template#add(is='auto-binding')
-          paper-icon-button.white(icon='add' on-tap='{{tapped}}')
-      div My app content.
+        paper-icon-button.white(icon='add')
+    div
+      add-feed-dialog(storage="storage")
 
     script.
-      var t = document.querySelector('#add');
-      t.tapped = function(){
-        alert('Clicked button!');
-      }
+      document.addEventListener('polymer-ready', function(e) {
+        var btn = document.querySelector('paper-icon-button');
+        var dialog = document.querySelector('add-feed-dialog').$.add;
+
+        btn.addEventListener('click', function(e) {
+          dialog.toggle();
+        });
+      });
