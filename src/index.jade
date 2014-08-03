@@ -2,25 +2,26 @@ doctype html
 html(lang='en' ng-app='rss')
   head
     title Angular RSS
-    script(src='bower_components/jquery/dist/jquery.min.js')
-    script(src='bower_components/angular/angular.min.js')
-    script(src='bower_components/angular-animate/angular-animate.min.js')
-    script(src='material/config/lib/angular-animate-sequence/angular-animate-sequence.js')
-    script(src='material/config/lib/angular-animate-sequence/angular-animate-stylers.js')
-    script(src='material/dist/material-design.min.js')
+    script(src='bower_components/platform/platform.js')
     script(src='bower_components/lodash/dist/lodash.min.js')
-    script(src='js/angular-rss.js')
 
-    link(rel='stylesheet' href='material/dist/material-design.min.css')
-  body
-    div(ng-controller='RSSController')
-      material-toolbar.material-theme-dark
-        .material-toolbar-tools
-          span.material-flex RSS Feed Reader
-      material-tabs(selected='selectedTabIndex' nobar)
-        material-tab(ng-repeat='tab in tabs' label='{{tab.name}}' ng-click='toggleViewSidebar()')
-      material-sidenav.material-sidenav-left.material-whiteframe-z2(component-id='add')
-        div
-          h2 Add Feed
-      material-sidenav.material-sidenav-right.material-whiteframe-z2(component-id='view')
-        h2 View Feed List
+    link(rel="import" href="./bower_components/core-toolbar/core-toolbar.html")
+    link(rel="import" href="./bower_components/core-header-panel/core-header-panel.html")
+    link(rel="import" href="./bower_components/core-icons/core-icons.html")
+    link(rel="import" href="./bower_components/paper-icon-button/paper-icon-button.html")
+
+    link(href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css')
+    link(href='css/app.css' rel='stylesheet')
+    style(shim-shadowdom).
+      paper-icon-button {
+        vertical-align: middle;
+      }
+      paper-icon-button.white::shadow core-icon {
+        fill: #fff;
+      }
+  body(unresolved fullbleed)
+    core-header-panel
+      core-toolbar
+        span(flex style='color:white;') Feed Reader
+        paper-icon-button.white(icon='add')
+      div My app content.

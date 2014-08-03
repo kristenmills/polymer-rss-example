@@ -5,12 +5,13 @@ var uglify = require('gulp-uglify');
 var jade = require('gulp-jade');
 var del = require('del');
 var buildBranch = require('buildbranch');
+var webserver= require('gulp-webserver');
 
 var paths = {
   scripts: 'src/**/*.js',
   jade: 'src/**/*.jade',
   components: 'bower_components/**/*',
-  material: 'material/**/*'
+  css: 'src/**/*.css'
 };
 
 gulp.task('clean', function(cb) {
@@ -34,15 +35,23 @@ gulp.task('components', function(){
     .pipe(gulp.dest('build/bower_components'));
 });
 
-gulp.task('material', function(){
-  gulp.src(paths.material)
-    .pipe(gulp.dest('build/material'));
+gulp.task('css', function(){
+  gulp.src(paths.css)
+    .pipe(gulp.dest('build/css'));
 });
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['scripts']);
   gulp.watch(paths.jade, ['templates']);
+  gulp.watch(paths.css, ['css']);
+});
+
+gulp.task('webserver', function() {
+  gulp.src('build')
+    .pipe(webserver({
+      livereload: true
+    }));
 });
 
 gulp.task('ghPages', function(){
@@ -57,6 +66,6 @@ gulp.task('ghPages', function(){
   });
 });
 
-gulp.task('build', ['scripts', 'templates', 'components', 'material']);
-gulp.task('default', ['build', 'watch']);
+gulp.task('build', ['scripts', 'templates', 'components', 'css']);
+gulp.task('default', ['build', 'webserver', 'watch']);
 gulp.task('deploy', ['build', 'ghPages']);
