@@ -5,10 +5,12 @@ html(lang='en' ng-app='rss')
     script(src='bower_components/platform/platform.js')
     script(src='bower_components/lodash/dist/lodash.min.js')
 
-    link(rel="import" href="./bower_components/core-toolbar/core-toolbar.html")
-    link(rel="import" href="./bower_components/core-header-panel/core-header-panel.html")
-    link(rel="import" href="./bower_components/core-icons/core-icons.html")
-    link(rel="import" href="./bower_components/paper-icon-button/paper-icon-button.html")
+    link(rel="import" href="bower_components/core-toolbar/core-toolbar.html")
+    link(rel="import" href="bower_components/core-header-panel/core-header-panel.html")
+    link(rel="import" href="bower_components/core-icons/core-icons.html")
+    link(rel="import" href="bower_components/paper-icon-button/paper-icon-button.html")
+    link(rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html")
+    link(rel="import" href="bower_components/core-localstorage/core-localstorage.html")
 
     link(href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css')
     link(href='css/app.css' rel='stylesheet')
@@ -20,8 +22,16 @@ html(lang='en' ng-app='rss')
         fill: #fff;
       }
   body(unresolved fullbleed)
+    core-localstorage(name="feeds" id='storage')
     core-header-panel
       core-toolbar
         span(flex style='color:white;') Feed Reader
-        paper-icon-button.white(icon='add')
+        template#add(is='auto-binding')
+          paper-icon-button.white(icon='add' on-tap='{{tapped}}')
       div My app content.
+
+    script.
+      var t = document.querySelector('#add');
+      t.tapped = function(){
+        alert('Clicked button!');
+      }
