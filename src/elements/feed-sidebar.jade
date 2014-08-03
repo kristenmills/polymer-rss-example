@@ -1,15 +1,23 @@
-link(rel='import' href='../bower_components/core-list/core-list.html')
+link(rel='import' href='../bower_components/core-menu/core-menu.html')
+link(rel='import' href='../bower_components/core-item/core-item.html')
 
 polymer-element(name='feed-sidebar' attributes='feed')
   template
-    core-list(data="{{data.feed.entries}}")
-      template
-        div
-          span {{title}}
-          hr
+    style.
+      hr {
+        border: 0;
+        height: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+    core-menu(selected="{{selected}}")
+      template(repeat="{{data.feed.entries}}")
+        core-item(label="{{title}}")
+        hr
   script.
     Polymer('feed-sidebar', {
       ready: function(){
         this.data = {}
+        this.selected = 0
       }
     });
