@@ -4,12 +4,17 @@ link(rel='import' href='../bower_components/paper-tabs/paper-tabs.html')
 polymer-element(name='feed-tabs')
   template
     style.
-      paper-tabs {
-        background-color: #00bcd4;
+      paper-tabs.transparent-teal {
+        background-color: 00bcd4;
+        color: #fff;
+        box-shadow: none;
+      }
+
+      paper-tabs.transparent-teal paper-tab::shadow #ink {
         color: #fff;
       }
 
-    paper-tabs(selected="{{selectedTab}}"  on-core-select="{{onSelect}}" flex nobar )
+    paper-tabs.transparent-teal(selected="{{selectedTab}}"  on-core-select="{{onSelect}}" flex nobar )
       template(repeat='{{feed in feeds}}')
         paper-tab {{feed.feed.title}}
 
