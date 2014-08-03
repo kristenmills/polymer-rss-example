@@ -1,7 +1,7 @@
 link(rel='import' href='../bower_components/core-menu/core-menu.html')
 link(rel='import' href='../bower_components/core-item/core-item.html')
 
-polymer-element(name='feed-sidebar' attributes='feed')
+polymer-element(name='feed-sidebar')
   template
     style.
       hr {
@@ -10,14 +10,20 @@ polymer-element(name='feed-sidebar' attributes='feed')
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
       }
-    core-menu(selected="{{selected}}")
+    core-menu(selected="{{selected}}" on-core-select="{{onSelect}}")
       template(repeat="{{data.feed.entries}}")
-        core-item(label="{{title}}")
+        core-item(label="{{title}}" style="white-space: normal;")
         hr
   script.
     Polymer('feed-sidebar', {
       ready: function(){
-        this.data = {}
-        this.selected = 0
+        this.data = {};
+        this.selected = 0;
+        this.main = document.querySelector('feed-main');
+      },
+      onSelect: function(e, detail) {
+        if(detail.isSelected) {
+          this.main.data = this.data.feed.entries[this.selected/2];
+        }
       }
     });

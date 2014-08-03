@@ -9,7 +9,7 @@ polymer-element(name='feed-tabs')
         color: #fff;
       }
 
-    paper-tabs(selected="{{selectedTab}}" flex nobar )
+    paper-tabs(selected="{{selectedTab}}"  on-core-select="{{onSelect}}" flex nobar )
       template(repeat='{{feed in feeds}}')
         paper-tab {{feed.feed.title}}
 
@@ -19,10 +19,10 @@ polymer-element(name='feed-tabs')
         this.selectedTab = 0
         this.feeds = document.querySelector('feed-list').feeds;
         this.sidebar = document.querySelector('feed-sidebar');
-        this.addEventListener('core-select', function(e){
-          if(e.detail.isSelected) {
-            this.sidebar.data = this.feeds[this.selectedTab];
-          }
-        });
+      },
+      onSelect: function(e, detail) {
+        if(detail.isSelected) {
+          this.sidebar.data = this.feeds[this.selectedTab];
+        }
       }
     });

@@ -1,5 +1,6 @@
 body {
   font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 core-header-panel {
@@ -12,11 +13,4 @@ core-header-panel {
 core-toolbar {
   background-color: #00bcd4;
   color: #fff;
-}
-
-p {
-  margin: 20px;
-  padding: 80px 20px;
-  border-radius: 20px;
-  background-color: #eee;
 }

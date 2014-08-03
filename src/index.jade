@@ -14,6 +14,7 @@ html(lang='en' ng-app='rss')
     link(rel="import" href="elements/feed-list.html")
     link(rel="import" href="elements/feed-tabs.html")
     link(rel="import" href="elements/feed-sidebar.html")
+    link(rel="import" href="elements/feed-main.html")
     link(href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css')
     link(href='css/app.css' rel='stylesheet')
     style(shim-shadowdom).
@@ -36,9 +37,10 @@ html(lang='en' ng-app='rss')
       add-feed-dialog
 
       core-drawer-panel
-        core-header-panel(drawer)
+        div(main style="overflow: scroll;")
+          feed-main
+        div(drawer style="overflow: scroll;")
           feed-sidebar
-        core-header-panel(main)
     script.
       document.addEventListener('polymer-ready', function(e) {
         var btn = document.querySelector('paper-icon-button');

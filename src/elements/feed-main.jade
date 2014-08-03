@@ -1,0 +1,15 @@
+polymer-element(name='feed-main' attributes="data")
+  template
+    h1 {{data.title}}
+    h3 {{data.author}}
+    br
+    div#content
+  script.
+    Polymer('feed-main', {
+      ready: function(){
+        this.data = {};
+      },
+      dataChanged: function() {
+        this.$.content.innerHTML = this.data.content || "";
+      }
+    });
