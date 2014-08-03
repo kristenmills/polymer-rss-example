@@ -25,16 +25,18 @@ html(lang='en' ng-app='rss')
 
   body(unresolved fullbleed)
     feed-list
-    core-header-panel(mode='seamed')
-      core-toolbar
+    core-header-panel(mode='waterfall')
+      core-toolbar.medium-tall
         div(flex style='color:white;') Feed Reader
         paper-icon-button.white(icon='add')
 
-        div.bottom.fit(horizontal layout)
-      feed-tabs
+        div.bottom.fit
+          feed-tabs
+      add-feed-dialog
 
-    div
-        add-feed-dialog
+      core-drawer-panel
+        div(drawer)
+        div(main)
     script.
       document.addEventListener('polymer-ready', function(e) {
         var btn = document.querySelector('paper-icon-button');

@@ -11,6 +11,7 @@ polymer-element(name='add-feed-dialog' attributes='storage')
     polymer-jsonp#ajaxfeed(url='https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q={{feedUrl}}&callback=')
     paper-dialog#add(heading='Add New Field' transition='paper-dialog-transition-center')
       paper-input(floatingLabel label='Feed URL' value='{{feedUrl}}')
+      br
       paper-button(label='Submit' on-tap="{{addFeed}}")
       paper-toast#toast(text='{{toastMessage}}')
   script.
