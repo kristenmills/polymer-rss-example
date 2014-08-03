@@ -4,14 +4,15 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var jade = require('gulp-jade');
 var del = require('del');
-var buildBranch = require('buildbranch');
+var deploy = require('gulp-gh-pages');
 var webserver= require('gulp-webserver');
 
 var paths = {
   scripts: 'src/**/*.js',
   jade: 'src/**/*.jade',
   components: 'bower_components/**/*',
-  css: 'src/**/*.css'
+  css: 'src/**/*.css',
+  build: 'build/**/*'
 };
 
 gulp.task('clean', function(cb) {
@@ -55,15 +56,8 @@ gulp.task('webserver', function() {
 });
 
 gulp.task('ghPages', function(){
-  buildBranch({
-    branch: 'gh-pages',
-    folder: 'build',
-  }, function(err) {
-    if(err) {
-      throw err;
-    }
-    console.log('Published!');
-  });
+  gulp.src(paths.build)
+    .pipe(deploy({}));
 });
 
 gulp.task('build', ['scripts', 'templates', 'components', 'css']);
