@@ -11,7 +11,7 @@ polymer-element(name='feed-sidebar')
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
       }
     core-menu(selected="{{selected}}" on-core-select="{{onSelect}}")
-      template(repeat="{{data.feed.entries}}")
+      template(repeat="{{data.feed.items}}")
         core-item(label="{{title}}" style="white-space: normal;")
         hr
   script.
@@ -23,7 +23,7 @@ polymer-element(name='feed-sidebar')
       },
       onSelect: function(e, detail) {
         if(detail.isSelected) {
-          this.main.data = this.data.feed.entries[this.selected/2];
+          this.main.data = this.data.feed.items[this.selected/2];
         }
       }
     });

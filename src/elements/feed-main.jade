@@ -10,6 +10,6 @@ polymer-element(name='feed-main' attributes="data")
         this.data = {};
       },
       dataChanged: function() {
-        this.$.content.innerHTML = this.data.content || "";
+        this.$.content.innerHTML = this.data.description || "";
       }
     });

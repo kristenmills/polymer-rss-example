@@ -5,10 +5,10 @@ link(rel='import' href='../bower_components/paper-input/paper-input.html')
 link(rel='import' href='../bower_components/paper-button/paper-button.html')
 link(rel='import' href='../bower_components/paper-toast/paper-toast.html')
 link(rel='import' href='../bower_components/polymer-jsonp/polymer-jsonp.html')
-
+link(rel='import' href='../bower_components/polymer-rss/rss-feed.html')
 polymer-element(name='add-feed-dialog')
   template
-    polymer-jsonp#ajaxfeed(url='https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=15&q={{feedUrl}}&callback=')
+    rss-feed#feed(url='{{feedUrl}}' on-feed-parsed='{{feedParsed}}' on-invalid-feed='{{invalidFeed}}')
     paper-dialog#add(heading='Add New Field' transition='paper-dialog-transition-center')
       paper-input(floatingLabel label='Feed URL' value='{{feedUrl}}')
       paper-button(label='Submit' on-tap="{{addFeed}}" affirmative)
@@ -17,29 +17,26 @@ polymer-element(name='add-feed-dialog')
     Polymer('add-feed-dialog', {
       ready: function(){
         this.feedUrl = '';
-        var other = this;
-        this.ajax = document.querySelector('add-feed-dialog').$.ajaxfeed;
         this.feedlist = document.querySelector('feed-list');
-        this.ajax.addEventListener("polymer-response",
-          function(event) {
-            var response = event.detail.response;
-            if(response.responseStatus === 200 ){
-              var feed_object = { url: other.feedUrl, feed: response.responseData.feed }
-              other.feedlist.add(feed_object);
-              other.toastMessage = "Successfully added feed";
-              document.querySelector('add-feed-dialog').$.toast.show();
-            }else {
-              other.toastMessage = response.responseDetails;
-              document.querySelector('add-feed-dialog').$.toast.show();
-            }
-          });
       },
       addFeed: function() {
         if(this.feedlist.contains(this.feedUrl)){
           this.toastMessage = 'Already added feed';
           document.querySelector('add-feed-dialog').$.toast.show();
         } else {
-          this.ajax.go();
+          this.$.feed.go();
         }
+      },
+      feedParsed: function(event) {
+        var dialog = document.querySelector('add-feed-dialog');
+        var feedObject = {url: dialog.feedUrl, feed: event.detail.feed};
+        dialog.feedlist.add(feedObject);
+        dialog.toastMessage = "Successfully added feed";
+        dialog.$.toast.show();
+      },
+      invalidFeed: function(event) {
+        var dialog = document.querySelector('add-feed-dialog');
+        dialog.toastMessage = "Invalid feed";
+        dialog.$.toast.show();
       }
     });
