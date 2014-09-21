@@ -1,0 +1,17 @@
+<link rel="import" href="../bower_components/core-menu/core-menu.html"/><link rel="import" href="../bower_components/core-item/core-item.html"/><polymer-element name="feed-sidebar"><template><style>hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}</style><core-menu selected="{{selected}}" on-core-select="{{onSelect}}"><template repeat="{{data.feed.items}}"><core-item label="{{title}}" style="white-space: normal;"></core-item><hr/></template></core-menu></template><script>Polymer('feed-sidebar', {
+  ready: function(){
+    this.data = {};
+    this.selected = 0;
+    this.main = document.querySelector('feed-main');
+  },
+  onSelect: function(e, detail) {
+    if(detail.isSelected) {
+      this.main.data = this.data.feed.items[this.selected/2];
+    }
+  }
+});</script></polymer-element>

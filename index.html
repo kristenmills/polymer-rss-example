@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="en" ng-app="rss"><head><title>Polymer RSS</title><script src="bower_components/platform/platform.js"></script><script src="bower_components/lodash/dist/lodash.min.js"></script><link rel="import" href="bower_components/core-toolbar/core-toolbar.html"><link rel="import" href="bower_components/core-header-panel/core-header-panel.html"><link rel="import" href="bower_components/core-icons/core-icons.html"><link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html"><link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html"><link rel="import" href="elements/add-feed-dialog.html"><link rel="import" href="elements/feed-list.html"><link rel="import" href="elements/feed-tabs.html"><link rel="import" href="elements/feed-sidebar.html"><link rel="import" href="elements/feed-main.html"><link href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,300" rel="stylesheet" type="text/css"><link href="css/app.css" rel="stylesheet"><style shim-shadowdom>paper-icon-button {
+  vertical-align: middle;
+}
+paper-icon-button.white::shadow core-icon {
+  fill: #fff;
+}
+</style></head><body unresolved fullbleed><feed-list></feed-list><core-header-panel mode="waterfall"><core-toolbar class="medium-tall"><div flex style="color:white;">Feed Reader</div><paper-icon-button icon="add" class="white"></paper-icon-button><div class="bottom fit"><feed-tabs></feed-tabs></div></core-toolbar><add-feed-dialog></add-feed-dialog><core-drawer-panel><div main style="overflow: scroll;"><feed-main></feed-main></div><div drawer style="overflow: scroll;"><feed-sidebar></feed-sidebar></div></core-drawer-panel></core-header-panel><script>document.addEventListener('polymer-ready', function(e) {
+  var btn = document.querySelector('paper-icon-button');
+  var dialog = document.querySelector('add-feed-dialog').$.add;
+
+  btn.addEventListener('click', function(e) {
+    dialog.toggle();
+  });
+});</script></body></html>

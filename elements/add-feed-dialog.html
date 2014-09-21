@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html"/><link rel="import" href="../bower_components/paper-dialog/paper-dialog-transition.html"/><link rel="import" href="../bower_components/core-ajax/core-ajax.html"/><link rel="import" href="../bower_components/paper-input/paper-input.html"/><link rel="import" href="../bower_components/paper-button/paper-button.html"/><link rel="import" href="../bower_components/paper-toast/paper-toast.html"/><link rel="import" href="../bower_components/polymer-jsonp/polymer-jsonp.html"/><link rel="import" href="../bower_components/polymer-rss/rss-feed.html"/><polymer-element name="add-feed-dialog"><template><rss-feed id="feed" url="{{feedUrl}}" on-feed-parsed="{{feedParsed}}" on-invalid-feed="{{invalidFeed}}"></rss-feed><paper-dialog id="add" heading="Add New Field" transition="paper-dialog-transition-center"><paper-input floatingLabel="floatingLabel" label="Feed URL" value="{{feedUrl}}"></paper-input><paper-button label="Submit" on-tap="{{addFeed}}" affirmative="affirmative"></paper-button></paper-dialog><paper-toast id="toast" text="{{toastMessage}}"></paper-toast></template><script>Polymer('add-feed-dialog', {
+  ready: function(){
+    this.feedUrl = '';
+    this.feedlist = document.querySelector('feed-list');
+  },
+  addFeed: function() {
+    if(this.feedlist.contains(this.feedUrl)){
+      this.toastMessage = 'Already added feed';
+      document.querySelector('add-feed-dialog').$.toast.show();
+    } else {
+      this.$.feed.go();
+    }
+  },
+  feedParsed: function(event) {
+    var dialog = document.querySelector('add-feed-dialog');
+    var feedObject = {url: dialog.feedUrl, feed: event.detail.feed};
+    dialog.feedlist.add(feedObject);
+    dialog.toastMessage = "Successfully added feed";
+    dialog.$.toast.show();
+  },
+  invalidFeed: function(event) {
+    var dialog = document.querySelector('add-feed-dialog');
+    dialog.toastMessage = "Invalid feed";
+    dialog.$.toast.show();
+  }
+});</script></polymer-element>

@@ -1,0 +1,21 @@
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html"/><polymer-element name="feed-tabs"><template><style>paper-tabs.transparent-teal {
+  background-color: 00bcd4;
+  color: #fff;
+  box-shadow: none;
+}
+
+paper-tabs.transparent-teal paper-tab::shadow #ink {
+  color: #fff;
+}
+</style><paper-tabs selected="{{selectedTab}}" on-core-select="{{onSelect}}" flex="flex" nobar="nobar" class="transparent-teal"><template repeat="{{feed in feeds}}"><paper-tab>{{feed.feed.title}}</paper-tab></template></paper-tabs></template><script>Polymer('feed-tabs', {
+  ready: function() {
+    this.selectedTab = 0
+    this.feeds = document.querySelector('feed-list').feeds;
+    this.sidebar = document.querySelector('feed-sidebar');
+  },
+  onSelect: function(e, detail) {
+    if(detail.isSelected) {
+      this.sidebar.data = this.feeds[this.selectedTab];
+    }
+  }
+});</script></polymer-element>

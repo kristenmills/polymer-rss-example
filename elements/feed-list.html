@@ -1,0 +1,18 @@
+<polymer-element name="feed-list"><script>Polymer('feed-list', {
+  ready: function() {
+    this.feeds = [];
+  },
+
+  add: function(feed) {
+    this.feeds.push(feed);
+  },
+
+  remove: function(index) {
+    this.feeds.slice(index, 1);
+  },
+
+  contains: function(url) {
+    return _.where(this.feeds, { url: url }).length !== 0
+  }
+
+});</script></polymer-element>
